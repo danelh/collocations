@@ -1,5 +1,9 @@
 bad lemmas: "at" / "t" etc.
 
+persus. not like the suggestions. 
+
+not large enough of corpus.
+
 ## Lemmatization
 os - might be both bone and mounth 
 gero1 and gero - not sure why this split
@@ -41,6 +45,14 @@ There are yet 2 more aspect in which R algorithm differs from W algorithm. First
 Here W3 will count the pair (_ad,_ad_), but R4 in the slice (_ad_, _vis_, _atque_, _ad_) the pair (_ad_, _ad_) is not counter.  
 
 Originally the idea behind R algotihm was to convey the "sematic field" of a word, for this reason we have very high R's like R12 and R16. (though, in a sense, W8 also implies span of 16 words). For this reason we have anoter diffence between W and R, which R omits high-frequency words. (usually words that occours in more than 1% of the slices) thus the lemma _sum_ for example is not be found in R's. On a second thought however, not sure this was very good idea, and this might change in the future.
+
+### t-value calclation
+
+After counting the pairs accross all our not-large-enough-corpus, a simple t-value calculation (in a manner as decribed here) - is peformed in order to revel how signignifcant a given pair is: in other words: base of the frequency of each lemma how large is the gap between the number of co-occurence we would expect to see by pure statistics, and the number of co-occures that there are in actually. the larger this gap is, the larger is the t-vale -- meaning that the pair is more occour together more significatelly.
+
+for W algorithms, this Tool shows the lemmas whose t-values are bigger than 1.8 (to the max of 200 lemmas). For R, howver, since it ususally have larger t-value (due to the amplication mechamism described above), the t-value treshhold was set to 2.0. 
+
+several unncessary techinicalities were omitted from the above W and R algorithms desception. For furthor info, one should console the source code #TODO 
 
 ## asymmetry in t-value
 Intuitivly, We would rather expect that the strengh of connection between a pair (their t-value) to be indeffient to the order of the pair. Indeed, in works like that in most of the pairs, and even if there is diffece, it is ususally very small. However, sometimes the different might seem quite significat: for example, in W4 for (_sum_, _necesse_), we have t-value of 32.56, but if we take (_necesse_, _sum_), we will have t-value of 27.21. The reason for this observation is this: lets assume we have the lemmatized sentance: 
