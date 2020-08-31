@@ -27,6 +27,20 @@ The W algorithm fixes on a lemma, and counts all the lemmas within a distance of
 Importantely, this algorithm does **not** award a word more compared to other, even if it is closer than the other: All words within the given distance count the same. Thus, for example, in W2 algorithm and the lemma _mora_ the lemma _sine_ and the lemma _fugio_ would be credited the same, althoug _sine_ is closer to _mora_ than _fugio_ is.  
 
 ### Random Slice (r) Algorithm
+
+Unlike W, R algorithms does not fixes on a lemma, rather, as his name suggets, takes a slice of a given length and counts the pairs there. Let's consider yet again our lemmatized sentance:
+
+> rabidus in hortus canis video puer, atque sine mora inde fugio.
+
+If we use R3, that means we take slices of length of 3, which are: (_rabidus, _in_, _hortus_), (_in_, _hortus_, _canis_), (_hortus_, _canis_, _video_), etc... So for the lemma _hortus_ we can see it counts _in_, _canis_ twice (since they co-occur in 2 diffrent slices), and _rabidus_, _video_ only once. In that way it awards closer words and counts them more. in R3 for example the pair (_sine_ , _mora_) is counted twice while (_sine_, _inde_) only once. This mechanism creates amolification effect for closer words, and hence might results in very high t-values for higher R's.
+
+There are yet 2 more aspect in which R algorithm differs from W algorithm. in R algorithms we don't count pairs of the same word. Example:
+
+> 
+
 ampliphication effect. 
 no same word.
 high frequency.
+
+
+issimetry
