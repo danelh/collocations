@@ -5,13 +5,19 @@ persus. not like the suggestions.
 not large enough of corpus.
 
 ## Lemmatization
-os - might be both bone and mounth 
-gero1 and gero - not sure why this split
+The lemmatization process is done by [CLTK lemmatization backoff method](https://docs.cltk.org/en/latest/latin.html#lemmatization-backoff-method)(More info on that should be found there). As a lemmatization algorithm, it clearly has it's restrictaion and issue. There are 3 main issues: 
+1.here are several odd lemmas like one-letter or two-letter lemmas (or even with more letters) such as _t_, _m_. Their source require futher invistigation in order to suggest apporatiate management and fix of the issue. (It seems many of those might be explained and names initials). 
+2. The second and more irritating problem is simply mis-lemmatization. Such is the distacation between _os_ (mouth) and _os_(bone) seems to be virtually non-existeed and mixed in the lemma _os_ (there is also lemma _os1_ but not sure what it signifies), hence we have both _frango_ (that suggests the meaning of bone) and _vultus_ (that suggests the meaning of mouth) both quite high in the table.
+3. Sometimes what seems to be one lemma is splited into 2 diffent lemams. example to such is _gero_ and _gero1_. They have both very similar collocation tables: this suggests that the split into 2 different lemmas is either unjustified or simply not working well-enough to the time being.
+
+### i-j, u-v, capital letters
+In order to avoid duplicate lemams, before the texts were sent to lemmatization, a replace of every "j" with "i" and every "v" with "u" took place as instructed; but also every capital letter were replace to it's lower case. As a results, **we have no j or v in the lemmas**, so the user may encounter the less-familiar _uita_ instead of _vita_. in the Lemma selection textbox however, the user might insert "j" and "v" as they will be autumatically replaced.
+
 
 ## why I can't find my lemma?
 Usually you would expect to find every word that comes to mind, yet rarly you will stumble upon a lemma you expect to find, but the Tool can't locate. There are basically three possible reasons why you can see a lemma you were searching:
 1. **Spelling variant.** This tools can handle spelling variation, and suggest to the user, another the lemma. But it can do that long as there is one diffenrt between your word and the lemma. so it can sugget _ap**p**ropinquo_ for input of _a**d**porpinquo_. If, however, the user enters _cl**y**peu**m**_ this Tool can't find _cl**i**peu**s**_ since it is removed by 2 letters. 
-2. **Lemmatization**. It seems sometimes the lemmetizer has some mechanism that yields lemmas which are less trivial. Example to such is _spons_. it lemmatizes to _sponte_. Unfortunatelly, there is no easy way I know of to acpture those. in such cases the uses should consult the full list [ TODO: add link] and to search it there using possible variants. [to inquire whetehr spons lemetizes to sponte or not]  
+2. **Lemmatization**. It seems sometimes the lemmetizer has some mechanism that yields lemmas which are less trivial, or rather when in doubt makes the same selection that brings the other options to very low frequency (see point 3). Example to such is _spons_. It indeed lemmatizes to _spons_, however when in the ablative form of _sponte_, it lemmatizes to _sponte_ (probably the adverb); and since most of the instances of _spons_ are indeed _sponte_, it simply renderes _spons_ to be at very low frequency. Unfortunatelly, there is no easy way I know of to acpture those. In such cases the uses should consult the [full list of lemmas](https://raw.githubusercontent.com/danelh/collocations/master/all_lemmas.txt) and to search it there using possible variants.
 3. **Low frequency**. Even if the lemma is absultely valid, it might be off this Tool if it's frequency is extremely low (usually below 10 occourences). For example the word _langa_ which is a kind of lizard is not here since it is too rare.
 
 ## algorithms
