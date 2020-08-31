@@ -313,14 +313,54 @@ Collocations
 	}
 	
 	function get_suggestions(l1, l2){
-		x = all_lemmas[l1];
-		y = all_lemmas[l2];
-		return "xxx";
+		var txt = ""
+		var x = all_lemmas[l1];
+		var y = all_lemmas[l2];		
+		var order = get_suggestion_order(x.length, y.length);
+		for (var o=0; o < order.length; o+=1){
+			var x_index = order[o][0];
+			var y_index = order[o][1];
+			txt += get_href_for_suggestion(x[x_index], y[y_index], o+1);
+			if (o != order.length-1){
+				txt += ","
+			}
+		}
+		return txt;
+	}
+	
+	
+	
+	function get_suggestion_order(len1, len2){
+		// (4,3) is better than (2,5)
+		// (1,8) is better than (4,6) (because the sum here is 9, there 10)
+		// so sort all posibilitis - first by sum (lower the better), than by multplication (higher the better)
+		var res = [];
+		var max_sum = (len1-1) + (len2-1);		
+		for (var i=0; i <= max_sum; i += 1){
+			poss = get_all_order_possibilities_by_sum(len1, len2, i);
+			poss.sort(function(a, b){return b[0]*b[1] - a[0]*a[1]});			
+			res.push(...poss);
+		}
+		
+		return res;
+	}
+	
+	function get_all_order_possibilities_by_sum(len1, len2, sum){
+		var res = [];
+		for (var i=0; i<len1; i+=1){
+			for (var j=0; j<len2; j+=1){
+				if (i+j == sum){
+					res.push([i,j]);
+				}
+			}
+		}
+		
+		return res;
 	}
 	
 	function update_other_lemmas(others){
 		
-		txt = ""
+		var txt = ""
 		if (!(current_lemma in all_lemmas)){
 			txt = "Could not find \"" + current_lemma + "\", consider: ";
 		}
@@ -348,10 +388,18 @@ Collocations
 	function get_href_for_new_algo(new_algo){		
 		return "<a href=\"javascript:void(0);\" onClick=\"new_algo_selection_from_link('" + new_algo + "')\">" + new_algo + "</a>"; 
 	}
+	
+	function get_href_for_suggestion(x,y, i){
+		// #praeb ~ #usum
+		// https://latin.packhum.org/concordance?q=%23praeb+%7E+%23usum
+		link = "https://latin.packhum.org/concordance?q=%23" + x + "+%7E+%23" + y
+		return "<a href=" + link + "\">" + i + "</a>" 
+	}
+
 
 	
 	function get_did_you_mean(lemma){
-		res = [];
+		var res = [];
 		for(var key in all_lemmas){
 			if (1 == get_lev_distance(lemma, key)){
 				res.push(key);
