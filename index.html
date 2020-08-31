@@ -43,6 +43,7 @@ Collocations
 	var supported_algos = [];
 	var current_algo = "";
 	var supported_algo_index = -1;
+	var user_clicked_browser = false
 	ref_loader.done(function(){
 		all_lemmas = ref_loader.responseJSON;		
 		init();}
@@ -57,15 +58,28 @@ Collocations
 		//playing_list = all_words_sorted_list.slice(from, to);
 		fill_algos();
 		init_keyboard_clicks();
+		fire_from_url();
+		init_url_change();
+		//next();
+		// Try this link for fast loading
+		//https://chrissmith.xyz/lightning-fast-filtering-in-javascript/
+		// https://stackoverflow.com/questions/9639703/ie8-javascript-very-slow-to-load-large-list-of-options-in-select-element
+	}
+	
+	function fire_from_url(){
 		load_params_from_url();
 		if (current_lemma){
 			// call lemma as user selection
 			lemma_selected();
 		}
-		//next();
-		// Try this link for fast loading
-		//https://chrissmith.xyz/lightning-fast-filtering-in-javascript/
-		// https://stackoverflow.com/questions/9639703/ie8-javascript-very-slow-to-load-large-list-of-options-in-select-element
+	}
+	
+	function init_url_change(){
+		window.addEventListener('popstate', function(){
+			console.log('popstate changed!');
+			user_clicked_browser = true
+			fire_from_url();			
+		})
 	}
 	
 	function fill_algos(){
@@ -364,8 +378,23 @@ Collocations
 		}
 		if (current_algo){			
 			url.searchParams.set("algo", current_algo);
-		}		
-		window.history.pushState('updated params', '', url.toString());
+		}
+		if (!user_clicked_browser)
+		{
+			// replaceState if only algo has changed. we don't want to fill the history. we want efficient back
+			// also, you can toggle with arrows the algo.
+			url_lemma = get_param_from_url("lemma");
+			if (url_lemma != current_lemma){
+				window.history.pushState('updated params', '', url.toString());
+			}
+			else{
+				window.history.replaceState('updated params', '', url.toString());
+			}
+		}
+		else{
+			// init here - because async
+			user_clicked_browser = false
+		}
     }
 	
 	function load_algo_from_url(){
