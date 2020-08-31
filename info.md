@@ -34,13 +34,17 @@ Unlike W, R algorithms does not fixes on a lemma, rather, as his name suggets, t
 
 If we use R3, that means we take slices of length of 3, which are: (_rabidus, _in_, _hortus_), (_in_, _hortus_, _canis_), (_hortus_, _canis_, _video_), etc... So for the lemma _hortus_ we can see it counts _in_, _canis_ twice (since they co-occur in 2 diffrent slices), and _rabidus_, _video_ only once. In that way it awards closer words and counts them more. in R3 for example the pair (_sine_ , _mora_) is counted twice while (_sine_, _inde_) only once. This mechanism creates amolification effect for closer words, and hence might results in very high t-values for higher R's.
 
-There are yet 2 more aspect in which R algorithm differs from W algorithm. in R algorithms we don't count pairs of the same word. Example:
+There are yet 2 more aspect in which R algorithm differs from W algorithm. First, in R algorithms we don't count pairs of the same word. Example:
 
-> 
+> ad vim atque ad arma confugere
 
-ampliphication effect. 
-no same word.
-high frequency.
+Here W3 will count the pair (_ad,_ad_), but R4 in the slice (_ad_, _vis_, _atque_, _ad_) the pair (_ad_, _ad_) is not counter.  
 
+Originally the idea behind R algotihm was to convey the "sematic field" of a word, for this reason we have very high R's like R12 and R16. (though, in a sense, W8 also implies span of 16 words). For this reason we have anoter diffence between W and R, which R omits high-frequency words. (usually words that occours in more than 1% of the slices) thus the lemma _sum_ for example is not be found in R's. On a second thought however, not sure this was very good idea, and this might change in the future.
 
-issimetry
+## asymmetry in t-value
+Intuitivly, We would rather expect that the strengh of connection between a pair (their t-value) to be indeffient to the order of the pair. Indeed, in works like that in most of the pairs, and even if there is diffece, it is ususally very small. However, sometimes the different might seem quite significat: for example, in W4 for (_sum_, _necesse_), we have t-value of 32.56, but if we take (_necesse_, _sum_), we will have t-value of 27.21. The reason for this observation is this: lets assume we have the lemmatized sentance: 
+
+> sum necesse vir sum magnus amnis
+
+in W2 algorithm, the pair (_sum_, _necesse_) will be counted twice in this sentence! once when the fix on the first _sum_, and the second time on the second _sum_. The pair (_necesse_, _sum_), however, will be counter only once. because every pair can be counted only once per fixed word. (this was done on purpuse, maybe wrongly, under the assumption that this will results in more meaningful results). This explains why this assymetry should be quite rare, and mainly for very high frequency words.
