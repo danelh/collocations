@@ -43,7 +43,7 @@ After lemmatization, we thus have:
 
 > rabidus in hortus canis video puer, atque sine mora inde fugio.
 
-The W algorithm fixes on a lemma, and counts all the lemmas within a distance of a given number of words. For the lemma _canis_ W**1** algorithms will count *hortus* and *video*. i.e take 1 word from each side; for W**3** it will count 3 words from each side: _rabidus_, _in_, _horto_, _video_, _puer_, _atque_. As we can understand, since Latin allows great amount of flexibility to word order. The meaningful pair (_rabidus, _canis_), which we would like to be counter, would not be in W1 or W2 but only in W3 and above. For this reason, we have many W algorithms: W1, W2, W3, W4, W6, W8.
+The W algorithm fixes on a lemma, and counts all the lemmas within a distance of a given number of words. For the lemma _canis_ W**1** algorithms will count *hortus* and *video*. i.e take 1 word from each side; for W**3** it will count 3 words from each side: _rabidus_, _in_, _horto_, _video_, _puer_, _atque_. As we can understand, since Latin allows great amount of flexibility to word order. The meaningful pair (_rabidus, _canis_), which we would like to be counted, would not be in W1 or W2 but only in W3 and above. For this reason, we have many W algorithms: W1, W2, W3, W4, W6, W8.
 
 Importantly, this algorithm does **not** award a word more compared to other, even if it is closer than the other: All words within the given distance count the same. Thus, for example, in W2 algorithm and the lemma _mora_ the lemma _sine_ and the lemma _fugio_ would be credited the same, although _sine_ is closer to _mora_ than _fugio_ is.  
 
@@ -59,7 +59,7 @@ There are yet 2 more aspect in which R algorithm differs from W algorithm. First
 
 > ad vim atque ad arma confugere
 
-Here W3 will count the pair (_ad_,_ad_), but R4 in the slice (_ad_, _vis_, _atque_, _ad_) the pair (_ad_, _ad_) is not counter.  
+Here W3 will count the pair (_ad_,_ad_), but R4 in the slice (_ad_, _vis_, _atque_, _ad_) the pair (_ad_, _ad_) is not counted.  
 
 Originally the idea behind R algorithm was to convey the "semantic environment" of a word, for this reason we have very high R's like R12 and R16. For this reason we have another difference between W and R, which R omits high-frequency words. (usually words that occurs in more than 1% of the slices) thus the lemma _sum_, for example, is not be found in R's. On a second thought however, not sure this was very good idea, and it might change in the future.
 
