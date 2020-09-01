@@ -1,3 +1,19 @@
+# Latin collocation
+
+## Table of contents
+- [Intro](#intro)
+- [Lemmatization](#lemmatization)
+  * [i-j, u-v, capital letters](#i-j--u-v--capital-letters)
+- [Corpus](#corpus)
+- [algorithms](#algorithms)
+  * [Word Distance (w) Algorithm](#word-distance--w--algorithm)
+  * [Random Slice (r) Algorithm](#random-slice--r--algorithm)
+  * [t-value calculation](#t-value-calculation)
+- [suggestions](#suggestions)
+- [why I can't find my lemma?](#why-i-can-t-find-my-lemma-)
+- [asymmetry in t-value](#asymmetry-in-t-value)
+- [Contact information](#contact-information)
+
 ## Intro
 this Tool was created in order to locate the Latin-language [collocations](https://en.wikipedia.org/wiki/Collocation). The approach taken here is purely automatic, and this Tool is bound to find collocations only in the very strict-technical sense (this document explains in more details how this process takes place). Since Latin is a highly inflected language, the unit of consideration is not _word_, but rather a _lemma_. a _lemma_ is basically, generally speaking, the base, uninflected form a word; thus _navem_, _navibus_, _navium_ are all belong to the lemma _navis_ :usually nominative singular. The lemma of verbs is usually present first-person singular. In the search box, the user is expected to provide a _lemma_, and should expect to see  lemmas in the result-table.
 
