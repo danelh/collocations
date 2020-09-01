@@ -1,3 +1,9 @@
+---
+layout: default
+title: info
+---
+# Latin Collocations
+
 ## Table of contents
 - [Intro](#intro)
 - [Lemmatization](#lemmatization)
