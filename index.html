@@ -6,9 +6,9 @@ div.sticky {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  background-color: yellow;
-  padding: 20px;
-  font-size: 20px;
+  background-color: #85C1E9;
+  padding: 12px;
+  font-size: 24px;
 }
 
 table, td {
@@ -16,9 +16,26 @@ table, td {
   font-size: 20px;
 }
 
+# tr:nth-child(even) {background-color: #f2f2f2;}
+
 #info_link{
 	font-size: 20px;
 	padding-left: 5px;
+}
+
+#table_header{
+	font-size: 17px;
+}
+
+#lemmas_select{
+	outline: 0;
+	border-width: 0 0 2px;
+	border-color: black;
+	font-size: 24px;
+}
+
+#algo_select{
+	font-size: 24px;
 }
 
 
@@ -78,20 +95,12 @@ table, td {
 	);	
 	
 	function init(){
-		//all_words_sorted_list = get_all_words_sorted_list();
-		console.log("count: " + Object.keys(all_lemmas).length);
-		//update_params_from_url();
-		//console.log("to: " + to);
-		//console.log("from: " + from);
-		//playing_list = all_words_sorted_list.slice(from, to);
+		
+		//console.log("count: " + Object.keys(all_lemmas).length);
 		fill_algos();
 		init_keyboard_clicks();
 		fire_from_url();
 		init_url_change();
-		//next();
-		// Try this link for fast loading
-		//https://chrissmith.xyz/lightning-fast-filtering-in-javascript/
-		// https://stackoverflow.com/questions/9639703/ie8-javascript-very-slow-to-load-large-list-of-options-in-select-element
 	}
 	
 	function fire_from_url(){
@@ -103,8 +112,7 @@ table, td {
 	}
 	
 	function init_url_change(){
-		window.addEventListener('popstate', function(){
-			console.log('popstate changed!');
+		window.addEventListener('popstate', function(){			
 			user_clicked_browser = true
 			fire_from_url();
 			go_to_top_of_page();
@@ -174,9 +182,9 @@ table, td {
 			//console.log("right");
 
 		}
-		else if (x === 32){		
-			console.log("space");
-		}
+		//else if (x === 32){		
+		//	console.log("space");
+		//}
 
 	//	else if (x === 38){		
 	//		console.log("up");
@@ -203,15 +211,13 @@ table, td {
 		}
 	}
 	
-	function new_algo_selection_from_link(new_algo){
-		console.log("here");
+	function new_algo_selection_from_link(new_algo){		
 		document.getElementById("algo_select").value = new_algo;
 		change_algo_by_user();		
 	}
 	
 	function lemma_selected(){
-		get_lemma_from_user_input();
-		console.log(current_lemma);		
+		get_lemma_from_user_input();		
 		fetch_lemma(current_lemma);
 	}
 	
@@ -228,7 +234,7 @@ table, td {
 	}
 	
 	function display_current_lemma(){
-		console.log(current_lemma_json);
+		//console.log(current_lemma_json);
 		process_lemma_display();
 	}
 	
@@ -249,9 +255,9 @@ table, td {
 	
 	function process_lemma_display(){
 		get_supported_algos_for_lemma(ui);
-		console.log(supported_algos);		
+		//console.log(supported_algos);		
 		na = get_numeric_alternatives(current_lemma)
-		console.log(na);
+		//console.log(na);
 		if (na.length > 0){
 			update_other_lemmas(na);
 		}
@@ -296,7 +302,7 @@ table, td {
 	
 	function update_table(){
 		go_to_top_of_page();
-		console.log("u:" + current_algo);		
+		//console.log("u:" + current_algo);		
 		clear_table();		
 		if (current_lemma_json){
 			update_table_rows()
@@ -380,15 +386,21 @@ table, td {
 		
 		var txt = ""
 		if (!(current_lemma in all_lemmas)){
-			txt = "Could not find \"" + current_lemma + "\", consider: ";
+			txt += "Could not find \"" + current_lemma + "\"";
+			if (others.length > 0){
+				txt += ", consider: ";
+			} 
+			else{				
+				txt += "<a href=\"https://danelh.github.io/collocations/info.html#why-i-cant-find-my-lemma\" target=\"_blank\"> [why?] </a>";
+			}
 		}
 		else{			
-			txt = "Consider also: ";
+			txt += "Consider also: ";
 		}
 		for (i=0; i < others.length; i+=1){			
 			txt += get_href_for_new_lemma(others[i], true);
 			if (i != others.length - 1){
-				txt += ",";
+				txt += ", ";
 			}
 		}
 		document.getElementById("other_lemmas").innerHTML = txt;
@@ -462,8 +474,7 @@ table, td {
 		}
 		
 		for (i=0; i <=9; i+=1){
-			candidatae = _lemma+String(i);
-			console.log(candidatae);
+			candidatae = _lemma+String(i);			
 			if ((candidatae in all_lemmas) && (candidatae != lemma)){
 				res.push(candidatae);
 			}
@@ -486,11 +497,11 @@ table, td {
 				//txt += supported_algos[i]
 				txt += get_href_for_new_algo(supported_algos[i]);
 				if (i != supported_algos.length - 1){
-					txt += ",";
+					txt += ", ";
 				}
 			}
 			
-			txt += " click right (→) and left (←) arrows to toggle between them, or select from the algo-box above"
+			txt += ". Click right (→) and left (←) arrows to toggle between them, or select from the algo-box above."
 		}
 
 		document.getElementById("table_header").innerHTML = "Supported algos: " + txt ;
