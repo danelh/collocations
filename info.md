@@ -1,5 +1,3 @@
-# Latin collocation
-
 ## Table of contents
 - [Intro](#intro)
 - [Lemmatization](#lemmatization)
