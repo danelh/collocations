@@ -3,14 +3,14 @@
 ## Table of contents
 - [Intro](#intro)
 - [Lemmatization](#lemmatization)
-  * [i-j, u-v, capital letters](#i-j--u-v--capital-letters)
+  * [i-j, u-v, capital letters](#i-j-u-v-capital-letters)
 - [Corpus](#corpus)
 - [algorithms](#algorithms)
-  * [Word Distance (w) Algorithm](#word-distance--w--algorithm)
-  * [Random Slice (r) Algorithm](#random-slice--r--algorithm)
+  * [Word Distance (w) Algorithm](#word-distance-w-algorithm)
+  * [Random Slice (r) Algorithm](#random-slice-r-algorithm)
   * [t-value calculation](#t-value-calculation)
 - [suggestions](#suggestions)
-- [why I can't find my lemma?](#why-i-can-t-find-my-lemma-)
+- [why I can't find my lemma?](#why-i-cant-find-my-lemma)
 - [asymmetry in t-value](#asymmetry-in-t-value)
 - [Contact information](#contact-information)
 
