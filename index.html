@@ -16,15 +16,35 @@ table, td {
   font-size: 20px;
 }
 
+#info_link{
+	font-size: 20px;
+	padding-left: 5px;
+}
+
 
 </style>
 
 <head>
-<h2> Latin Collocations </h2>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-170550843-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-170550843-1');
+</script>
+
+<title> Latin Collocations </title>
+
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 
 <body>
+
+<h2> Latin Collocations </h2>
+<a id="info_link" href="https://danelh.github.io/collocations/info.html" target="_blank\"> for instructions and information about this tool </a>
+<p></p>
 <div class="sticky">Lemma selection:
 <!-- <select class="js-example-basic-single" id="lemmas_select" onchange="lemma_selected()"> </select> -->
 <input id="lemmas_select" onchange="lemma_selected()">
@@ -391,7 +411,7 @@ table, td {
 		// #praeb ~ #usum
 		// https://latin.packhum.org/concordance?q=%23praeb+%7E+%23usum
 		link = "https://latin.packhum.org/concordance?q=%23" + x + "+%7E+%23" + y
-		return "<a href=" + link + "\">" + i + "</a>" 
+		return "<a href=" + link + "\" target=\"_blank\">" + i + "</a>" 
 	}
 
 
@@ -412,6 +432,7 @@ table, td {
 		ui = lemmas_select.value;		
 		ui = ui.replace("j", "i");
 		ui = ui.replace("v", "u");
+		ui = ui.toLowerCase();
 		current_lemma = ui;
 	}
 	
@@ -469,7 +490,7 @@ table, td {
 				}
 			}
 			
-			txt += " click right (→) and left (←) arrows to toggle between them"
+			txt += " click right (→) and left (←) arrows to toggle between them, or select from the algo-box above"
 		}
 
 		document.getElementById("table_header").innerHTML = "Supported algos: " + txt ;
