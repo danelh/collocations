@@ -1,8 +1,5 @@
-bad lemmas: "at" / "t" etc.
-
-persus. not like the suggestions. 
-
-not large enough of corpus.
+## Intro
+this Tool was created in order to locate the Latin-language [collocations](https://en.wikipedia.org/wiki/Collocation). The approch taken here is purely automatic, and this Tool is bound to find collocations only in the very strict-technical sense (this document explains in more details how this process takes place). Since Latin is a highly inflected language, the unit of consideration is not _word_, but rather a _lemma_. a _lemma_ is basically, generally speaking, the base, uninflicated form a word; thus _navem_, _navibus_, _navium_ are all belong to the lemma _navis_ :usually nomanative singular. The lemma of verbs is usually present first-person singular. In the search box, the user is expected to provide a _lemma_, and should expect to see  lemmas in the result-table.
 
 ## Lemmatization
 The lemmatization process is done by [CLTK lemmatization backoff method](https://docs.cltk.org/en/latest/latin.html#lemmatization-backoff-method)(More info on that should be found there). As a lemmatization algorithm, it clearly has it's restrictaion and issue. There are 3 main issues: 
@@ -54,7 +51,7 @@ There are yet 2 more aspect in which R algorithm differs from W algorithm. First
 
 Here W3 will count the pair (_ad_,_ad_), but R4 in the slice (_ad_, _vis_, _atque_, _ad_) the pair (_ad_, _ad_) is not counter.  
 
-Originally the idea behind R algotihm was to convey the "semantic environment" of a word, for this reason we have very high R's like R12 and R16. (though, in a sense, W8 also implies span of 16 words). For this reason we have anoter diffence between W and R, which R omits high-frequency words. (usually words that occours in more than 1% of the slices) thus the lemma _sum_ for example is not be found in R's. On a second thought however, not sure this was very good idea, and this might change in the future.
+Originally the idea behind R algotihm was to convey the "semantic environment" of a word, for this reason we have very high R's like R12 and R16. For this reason we have anoter diffence between W and R, which R omits high-frequency words. (usually words that occours in more than 1% of the slices) thus the lemma _sum_ for example is not be found in R's. On a second thought however, not sure this was very good idea, and this might change in the future.
 
 ### t-value calclation
 
@@ -77,3 +74,7 @@ The last column of the collation table is the suggestion column. Each cell consi
 Each lemma has predifined strings starts(max 3) that it is likely to be found using them. for example _cado_ has: "cad", "cecidi", "cecider"; while _sapio_ has: "sapien", "sap" thus for this pair ([W2 t-value of 3.47](https://danelh.github.io/collocations/?algo=w2&lemma=cado)) we have 6 combinations to send to the concordance search. In this case, for example, we were lucky to successfully locate the collocation "cadere in sapientem" from the first combination ["cad" + "sapien"](https://latin.packhum.org/concordance?q=%23cad+%7E+%23sapien%22). The `#cad ~ #sapien` string given to the concardance as parameter for search, means to search sentences where we have words that start with "cad" and "sapien" and are within the distance of maximum 100 chars. The user might use their search tools more efficiently. To undertand futher how their concordance search works see [here](https://latin.packhum.org/help/search)
 
 **The user should keep in mind that the above concordence copus does not match the perseus from which the collocations were collocted.**  There are text that appear here and don't apear there, and vice verse. so theotically we might sometimes not find even one instace of a given pair in the concordance!
+
+## Contact information 
+[See here](https://danelh.github.io/about)
+
