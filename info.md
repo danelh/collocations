@@ -6,13 +6,17 @@ not large enough of corpus.
 
 ## Lemmatization
 The lemmatization process is done by [CLTK lemmatization backoff method](https://docs.cltk.org/en/latest/latin.html#lemmatization-backoff-method)(More info on that should be found there). As a lemmatization algorithm, it clearly has it's restrictaion and issue. There are 3 main issues: 
-1.here are several odd lemmas like one-letter or two-letter lemmas (or even with more letters) such as _t_, _m_. Their source require futher invistigation in order to suggest apporatiate management and fix of the issue. (It seems many of those might be explained and names initials). 
+1.here are several odd lemmas like one-letter or two-letter lemmas (or even with more letters) such as _t_, _m_. Their source require futher invistigation in order to suggest apporatiate management and fix of the issue. (It seems many of those might be explained and proper names initials). 
 2. The second and more irritating problem is simply mis-lemmatization. Such is the distacation between _os_ (mouth) and _os_(bone) seems to be virtually non-existeed and mixed in the lemma _os_ (there is also lemma _os1_ but not sure what it signifies), hence we have both _frango_ (that suggests the meaning of bone) and _vultus_ (that suggests the meaning of mouth) both quite high in the table. another exmple is _uoluo_ that many times is the results of the lemmatization process instead of _uolo_ to judge from the collaction table (see scio)
 3. Sometimes what seems to be one lemma is splited into 2 diffent lemams. example to such is _gero_ and _gero1_. They have both very similar collocation tables: this suggests that the split into 2 different lemmas is either unjustified or simply not working well-enough to the time being.
 
 ### i-j, u-v, capital letters
 In order to avoid duplicate lemams, before the texts were sent to lemmatization, a replace of every "j" with "i" and every "v" with "u" took place as instructed; but also every capital letter were replace to it's lower case. As a results, **we have no j or v in the lemmas**, so the user may encounter the less-familiar _uita_ instead of _vita_. in the Lemma selection textbox however, the user might insert "j" and "v" as they will be autumatically replaced.
 
+## Corpus
+The corpus that was used to collect the collocations is "latin_text_perseus" that was access by the dedicated [corpus reader](https://docs.cltk.org/en/latest/latin.html#corpus-readers) tool of CLTK. In this corpus there are 293 works available from Perseus ([full list](https://raw.githubusercontent.com/danelh/collocations/master/docs.txt)).
+
+The user should keep in his mind that **there are indications that this corpus is not large enough, and it's extention will benifit this Tool**. The developer of this Tool hopes, someday in the future, to extend the corpus, and take a deeper look in the [lemmatization process](#lemmatization), however those pursuits are not likely to happen in viable future.
 
 ## why I can't find my lemma?
 Usually you would expect to find every word that comes to mind, yet rarly you will stumble upon a lemma you expect to find, but the Tool can't locate. There are basically three possible reasons why you can see a lemma you were searching:
