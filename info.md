@@ -2,7 +2,7 @@
 layout: default
 title: info
 ---
-# Latin Collocations
+# Latin Collocations (Part of [Res Latinae](https://danelh.github.io/))
 
 ## Table of contents
 - [Intro](#intro)
