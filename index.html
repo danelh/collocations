@@ -234,8 +234,7 @@ table, td {
 	}
 	
 	function display_current_lemma(){
-		//console.log(current_lemma_json);
-		send_ga_event('collocation_lemma', 'collocation_lemma', window.location.href);
+		//console.log(current_lemma_json);		
 		process_lemma_display();
 	}
 	
@@ -273,6 +272,7 @@ table, td {
 		update_table_header();
 		get_current_selected_algo();
 		update_url_params();
+		send_ga_event('collocation_lemma', 'collocation_lemma', window.location.href);
 		update_table();
 				
 	}
