@@ -235,6 +235,7 @@ table, td {
 	
 	function display_current_lemma(){
 		//console.log(current_lemma_json);
+		send_ga_event('collocation_lemma', 'collocation_lemma', window.location.href);
 		process_lemma_display();
 	}
 	
@@ -630,6 +631,14 @@ table, td {
 		document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 
 	}
+	
+	function send_ga_event(event, cat, label){
+	  gtag('event', event, {
+	  'event_category' : cat,
+	  'event_label' : label
+		});
+	}
+
 
 
 </script>
